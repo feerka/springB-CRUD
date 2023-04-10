@@ -7,9 +7,9 @@
 </head>
 
 <body>
-	<h1>Inicio Fercho</h1>
+	<div th:replace="layout/plantilla :: header"></div>
         <a th:href="@{/agregar}">Crear Persona</a>
-	
+        </br>
 
 	<table border="1">
 		<tr>
@@ -36,5 +36,6 @@
 		</div>
 		
 	</table>
+        <div th:replace="layout/plantilla :: footer"></div>
 </body>
 </html>

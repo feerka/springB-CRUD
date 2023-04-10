@@ -7,6 +7,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import es.com.fk.servicio.PersonaServicio;
+import javax.validation.Valid;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -34,11 +36,14 @@ public class ControladorInicio {
      
     @GetMapping("/agregar")
     public String agregar(Persona persona){
-        return "modificar.xhtml";
+        return "modificar";
     }
     
     @PostMapping("/guardar")
-    public String guardar(Persona persona){
+    public String guardar(@Valid Persona persona,Errors errors ){
+        if(errors.hasErrors()){
+            return "modificar";
+        }
         personaServicio.guardar(persona);
         return "redirect:/";
     }
@@ -47,7 +52,7 @@ public class ControladorInicio {
     public String editar(Persona persona, Model model){
         persona = personaServicio.encontrarPersona(persona);
         model.addAttribute("persona", persona);
-        return "modificar.xhtml";
+        return "modificar";
     }
     
     @GetMapping("/eliminar")
